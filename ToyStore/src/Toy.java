@@ -4,10 +4,10 @@ public class Toy implements Serializable {
     private int id;
     private String name;
     private int countToys;
-    private int weight;
+    private double weight;
 
 
-    public Toy(String name, int countToys, int weight) {
+    public Toy(String name, int countToys, double weight) {
         id = -1 ;
         this.name = name;
         this.countToys = countToys;
@@ -22,7 +22,7 @@ public class Toy implements Serializable {
         this.countToys = countToys;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -38,7 +38,7 @@ public class Toy implements Serializable {
         return countToys;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 

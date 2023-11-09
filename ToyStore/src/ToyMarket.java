@@ -10,9 +10,9 @@ public class ToyMarket implements Serializable{
     private Random random = new Random();
     private String filename = "toys.json";
 
-    public ToyMarket() {
-        loadToys();
-    }
+//    public ToyMarket() {
+//        loadToys();
+//    }
 
     public void addToy(Toy toy) {
         if (!toys.contains(toy)){
@@ -22,7 +22,7 @@ public class ToyMarket implements Serializable{
         saveToys();
     }
 
-    public void editToyWeight(int id, int weight) {
+    public void editToyWeight(int id, double weight) {
         for (Toy toy : toys) {
             if (toy.getId() == id) {
                 toy.setWeight(weight);
@@ -37,7 +37,7 @@ public class ToyMarket implements Serializable{
         for (Toy toy : toys) {
             totalWeight += toy.getWeight();
         }
-        int randomWeight = random.nextInt() * totalWeight;
+        double randomWeight = random.nextDouble() * totalWeight;
         int weightSum = 0;
         for (Toy toy : toys) {
             weightSum += toy.getWeight();
@@ -67,22 +67,22 @@ public class ToyMarket implements Serializable{
         }
     }
 
-    private void loadToys() {
-        try {
-            File file = new File(filename);
-            if (file.exists()) {
-                FileInputStream fileInputStream = new FileInputStream(filename);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                toys = (List) objectInputStream.readObject();
-                objectInputStream.close();
-                fileInputStream.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void loadToys() {
+//        try {
+//            File file = new File(filename);
+//            if (file.exists()) {
+//                FileInputStream fileInputStream = new FileInputStream(filename);
+//                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//                toys = (List) objectInputStream.readObject();
+//                objectInputStream.close();
+//                fileInputStream.close();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public String toString() {

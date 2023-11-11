@@ -3,19 +3,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ToyMarket implements Serializable{
+public class ToyMarket implements Serializable {
     private int toyId;
     private List<Toy> toys = new ArrayList<>();
     private List<Toy> luckyToys = new ArrayList<>();
     private Random random = new Random();
     private String filename = "toys.json";
 
-//    public ToyMarket() {
-//        loadToys();
-//    }
 
     public void addToy(Toy toy) {
-        if (!toys.contains(toy)){
+        if (!toys.contains(toy)) {
             toys.add(toy);
             toy.setId(toyId++);
         }
@@ -38,12 +35,15 @@ public class ToyMarket implements Serializable{
             totalWeight += toy.getWeight();
         }
         double randomWeight = random.nextDouble() * totalWeight;
-        int weightSum = 0;
+        double weightSum = 0;
         for (Toy toy : toys) {
             weightSum += toy.getWeight();
             if (randomWeight <= weightSum) {
                 luckyToys.add(toy);
                 toy.setCountToys(toy.getCountToys() - 1);
+                if (toy.getCountToys() == 0) {
+                    toys.remove(toy);
+                }
                 saveToys();
                 return toy;
             }
@@ -66,23 +66,6 @@ public class ToyMarket implements Serializable{
             e.printStackTrace();
         }
     }
-
-//    private void loadToys() {
-//        try {
-//            File file = new File(filename);
-//            if (file.exists()) {
-//                FileInputStream fileInputStream = new FileInputStream(filename);
-//                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//                toys = (List) objectInputStream.readObject();
-//                objectInputStream.close();
-//                fileInputStream.close();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     public String toString() {
